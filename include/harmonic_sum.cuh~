@@ -1,0 +1,18 @@
+/* 
+ * Ewan Barr 2015 (GTC15)
+ */
+#include "cufft.h"
+#define ONE_OVER_SQRT2 0.70710678118654746f
+#define ONE_OVER_SQRT4 0.5f
+#define ONE_OVER_SQRT8 0.35355339059327373f
+#define ONE_OVER_SQRT16 0.25f
+#define ONE_OVER_SQRT32 0.17677669529663687f
+
+//Define a global texture for harmonic sum texture loads
+texture<cufftReal, 1, cudaReadModeElementType> harmsum_tex;
+
+__forceinline__ __device__ float custom_fetch(onst unsigned int, float);
+
+template <unsigned int max_harm> __global__ void incoherent_harmonic_sum(float**, unsigned int);
+
+void incoherent_harmonic_sum_helper(float*, float**, unsigned int, unsigned int, unsigned int);
