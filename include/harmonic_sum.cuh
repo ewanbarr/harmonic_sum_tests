@@ -78,7 +78,7 @@ __global__ void incoherent_harmonic_sum(
 // Helper function for launching from host
 void incoherent_harmonic_sum_helper(float* input, float** output, unsigned int size, unsigned int nharms, unsigned int nthreads)
 {
-  cudaBindTexture(0, harmsum_tex, output, size*sizeof(cufftReal));
+  cudaBindTexture(0, harmsum_tex, input, size*sizeof(cufftReal));
   
   unsigned int nblocks = size/nthreads + 1;
 
